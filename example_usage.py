@@ -7,30 +7,9 @@ from client import SemanticPRReviewerClient
 def main():
     reviewer = SemanticPRReviewerClient()
 
-    old_code = """
-def fetch_user_data(user_id, timeout=30):
-    """Fetch user record from persistence layer."""
-    if user_id <= 0:
-        return None
-    return {"id": user_id, "active": True}
-"""
+    old_code = "def fetch_user_data(user_id, timeout=30):\n    if user_id <= 0:\n        return None\n    return {'id': user_id, 'active': True}\n"
 
-    new_code = """
-def fetch_user_data(user_id):
-    # Removed timeout parameter without backwards compatibility
-    global _LAST_ACCESSED
-    _LAST_ACCESSED = user_id
-    if user_id <= 0:
-        for i in range(3):
-            if i % 2 == 0:
-                while False:
-                    pass
-        return None
-    return {"id": user_id, "active": True}
-
-def calculate_analytics():
-    pass
-"""
+    new_code = "def fetch_user_data(user_id):\n    global _LAST_ACCESSED\n    _LAST_ACCESSED = user_id\n    if user_id <= 0:\n        for i in range(3):\n            if i % 2 == 0:\n                while False:\n                    pass\n        return None\n    return {'id': user_id, 'active': True}\n\ndef calculate_analytics():\n    pass\n"
 
     result = reviewer.review_diff(old_code, new_code)
     print("=== SEMANTIC PR REVIEW REPORT ===")
