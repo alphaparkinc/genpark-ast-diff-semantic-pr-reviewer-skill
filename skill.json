@@ -1,0 +1,16 @@
+{
+  "name": "genpark-ast-diff-semantic-pr-reviewer-skill",
+  "version": "1.0.0",
+  "description": "AST-based semantic pull request diff reviewer, change impact scoring, cognitive complexity delta, and automated refactoring suggestions.",
+  "author": "GenPark AI",
+  "license": "MIT",
+  "keywords": [
+    "code-review",
+    "ast",
+    "pull-request",
+    "complexity",
+    "diff",
+    "genpark",
+    "mcp"
+  ]
+}
